@@ -1,0 +1,46 @@
+.poster-tiles-bg {
+  position: absolute;
+  top: 64px; /* Adjust if your header height is different */
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(20, 20, 20, 0.7); /* Add a dark overlay for dimming */
+}
+
+.poster-tiles-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.65); /* Stronger dimming overlay */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.poster-tiles-row {
+  display: flex;
+  width: max-content;
+  animation: poster-row-move 30s linear infinite;
+  position: relative;
+  z-index: 0;
+}
+
+.poster-tile {
+  width: 90px;
+  height: 135px;
+  object-fit: cover;
+  margin: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes poster-row-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
