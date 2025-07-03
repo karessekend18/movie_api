@@ -7,10 +7,12 @@ import  Nav  from "react-bootstrap/Nav";
 import { NavLink, useLocation } from "react-router-dom";
 import React, { useState, useRef, useEffect } from "react";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../home/SearchBar";
+import './header.css';
 
-const Header = ({ user, onSignOut }) => {
-    // Use useLocation for reliable route detection
+const Header = ({ user, onSignOut, onSearch }) => {
     const location = useLocation();
+    const isAuthPage = location.pathname.toLowerCase() === '/login' || location.pathname.toLowerCase() === '/register';
     const hideAuthButtons = location.pathname === '/login' || location.pathname === '/register';
     const hideNavLinks = hideAuthButtons;
 
@@ -31,42 +33,48 @@ const Header = ({ user, onSignOut }) => {
     }, []);
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" className="header-navbar">
             <Container fluid>
-                <Navbar.Brand href="/" style={{"color": 'gold'}}>
-                    <FontAwesomeIcon icon={faVideoSlash} /> Movimate
+                <Navbar.Brand href="/" className="header-brand">
+                    <FontAwesomeIcon icon={faVideoSlash} />
+                    <span className="header-title" style={{ color: 'gold', marginLeft: 8 }}>Movimate</span>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-                        {!hideNavLinks && <>
-                            <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-                            <Nav.Link as={NavLink} to="/watchlist">Watchlist</Nav.Link>
-                        </>}
-                    </Nav>
-                    {user ? (
-                        <div style={{ display: 'flex', alignItems: 'center', position: 'relative', marginRight: 20 }} ref={menuRef}>
-                            <span style={{ color: 'white', fontWeight: 500, marginRight: 8 }}>
-                                {user.name}
-                            </span>
-                            <FontAwesomeIcon icon={faUserCircle} style={{ color: 'white', fontSize: '2rem', cursor: 'pointer', marginRight: 8 }} onClick={() => setShowMenu(v => !v)} />
-                            {showMenu && (
-                                <div style={{ position: 'absolute', top: '2.5rem', right: 0, background: '#222', color: 'white', borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,0.2)', zIndex: 1000 }}>
-                                    <div style={{ padding: '10px 20px', cursor: 'pointer' }} onClick={onSignOut}>Sign Out</div>
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        !hideAuthButtons && <>
-                        <Nav.Link as={NavLink} to="/login">
-                          <Button variant="outline-info" className="ms-2">Login</Button>
-                        </Nav.Link>
-                        <Nav.Link as={NavLink} to="/register">
-                          <Button variant="outline-info" className="ms-2" style={{ marginRight: 16 }}>Register</Button>
-                        </Nav.Link>
-                        </>
-                    )}
-                </Navbar.Collapse>
+                {!isAuthPage && <>
+                  <Navbar.Toggle aria-controls="navbarScroll" />
+                  <Navbar.Collapse id="navbarScroll" className="header-navbar-collapse">
+                      <Nav className="me-auto my-2 my-lg-0 header-nav" navbarScroll>
+                          {!hideNavLinks && <>
+                              <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+                              <Nav.Link as={NavLink} to="/watchlist">Watchlist</Nav.Link>
+                          </>}
+                      </Nav>
+                      <div className="header-searchbar-container">
+                          <SearchBar onSearch={onSearch} />
+                      </div>
+                      {user ? (
+                          <div className="header-user" ref={menuRef}>
+                              <span className="header-username">
+                                  {user.name}
+                              </span>
+                              <FontAwesomeIcon icon={faUserCircle} className="header-user-icon" onClick={() => setShowMenu(v => !v)} />
+                              {showMenu && (
+                                  <div className="header-user-menu">
+                                      <div className="header-user-menu-item" onClick={onSignOut}>Sign Out</div>
+                                  </div>
+                              )}
+                          </div>
+                      ) : (
+                          !hideAuthButtons && <>
+                          <Nav.Link as={NavLink} to="/login">
+                            <Button variant="outline-info" className="ms-2">Login</Button>
+                          </Nav.Link>
+                          <Nav.Link as={NavLink} to="/register">
+                            <Button variant="outline-info" className="ms-2" style={{ marginRight: 16 }}>Register</Button>
+                          </Nav.Link>
+                          </>
+                      )}
+                  </Navbar.Collapse>
+                </>}
             </Container>
         </Navbar>
     )}

@@ -41,8 +41,22 @@ const Hero = ({movies}) => {
                         <div className = 'movie-poster'>
                             <img src={poster} alt="Movie Poster" />
                         </div>
-                        <div className = 'movie-title'>
-                            <h4>{movie.title}</h4>
+                        <div className = 'movie-title' style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span
+                              onClick={() => navigate(`/movie/${movie.imdbId}`)}
+                              style={{ cursor: 'pointer' }}
+                              title="View details about this movie"
+                            >
+                              {movie.title}
+                            </span>
+                            <button
+                              className="movie-details-action-btn"
+                              title="View details"
+                              onClick={e => { e.stopPropagation(); navigate(`/movie/${movie.imdbId}`); }}
+                              style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
+                            >
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="gold" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            </button>
                         </div>
                         <div className="movie-buttons-container">
                             <Link to={`/Trailer/${movie.trailerLink && movie.trailerLink.substring(movie.trailerLink.length-11)}`} >

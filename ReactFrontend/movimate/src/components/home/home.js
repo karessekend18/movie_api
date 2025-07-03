@@ -1,7 +1,12 @@
+import React from "react";
+import axios from "../../api/axiosConfig";
 import Hero from "../hero/hero";
-const Home = ({movies}) => {
+
+const Home = ({ movies }) => {
   return (
-   <Hero movies={movies} />
+    <div>
+      <Hero movies={movies} />
+    </div>
   );
 };
 

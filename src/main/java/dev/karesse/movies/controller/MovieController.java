@@ -30,4 +30,10 @@ public class MovieController {
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId) {
         return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovies(@RequestParam("query") String query) {
+        List<Movie> results = movieService.searchMoviesByTitle(query);
+        return new ResponseEntity<>(results, HttpStatus.OK);
+    }
 }

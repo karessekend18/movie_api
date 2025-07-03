@@ -1,0 +1,138 @@
+.movie-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  background: #181a1b;
+  color: #fff;
+  padding: 40px 24px 24px 24px;
+  border-radius: 16px;
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.movie-details-poster-section {
+  flex: 0 0 260px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.movie-details-poster {
+  width: 240px;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.movie-details-info-section {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movie-details-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: gold;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: color 0.2s, text-decoration 0.2s;
+  text-decoration: underline dotted transparent;
+}
+
+.movie-details-title:hover {
+  color: #ffb347;
+  text-decoration: underline solid #ffb347;
+}
+
+.movie-details-year {
+  color: #ffb347;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.movie-details-synopsis {
+  font-size: 1.08rem;
+  margin-bottom: 12px;
+  color: #eee;
+}
+
+.movie-details-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.movie-details-meta span {
+  background: #23272b;
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+.movie-details-trailer {
+  margin-top: 18px;
+}
+
+.movie-details-loading,
+.movie-details-error {
+  color: #fff;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-top: 60px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .movie-details-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 8px 16px 8px;
+    max-width: 98vw;
+  }
+  .movie-details-poster-section {
+    flex: 0 0 180px;
+  }
+  .movie-details-poster {
+    width: 160px;
+    height: 240px;
+  }
+  .movie-details-info-section {
+    flex: 1 1 100%;
+    width: 100%;
+    gap: 8px;
+  }
+  .movie-details-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-details-container {
+    padding: 10px 2px 8px 2px;
+    border-radius: 8px;
+    margin: 16px auto 0 auto;
+  }
+  .movie-details-poster-section {
+    flex: 0 0 120px;
+  }
+  .movie-details-poster {
+    width: 100px;
+    height: 140px;
+    border-radius: 6px;
+  }
+  .movie-details-title {
+    font-size: 1.05rem;
+  }
+  .movie-details-meta {
+    font-size: 0.92rem;
+    gap: 8px;
+  }
+  .movie-details-synopsis {
+    font-size: 0.98rem;
+  }
+}

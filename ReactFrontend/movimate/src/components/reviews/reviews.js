@@ -1,33 +1,80 @@
-import {useEffect, useEFfect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import ReviewForm from '../reviewForm/reviewForm';
-import React from 'react';
+import './reviews.css';
 
 const Reviews = ({getMovieData, movie, reviews, setReviews}) => {
     const revText = useRef();
     let params = useParams();
     const movieId = params.movieId;
+    const [editingReviewId, setEditingReviewId] = useState(null);
+    const [editText, setEditText] = useState("");
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
 
+    // Load reviews from localStorage for this movie
     useEffect(() => {
         getMovieData(movieId);
-    },[]);
+        const allReviews = JSON.parse(localStorage.getItem('allReviews') || '[]');
+        setReviews(allReviews.filter(r => r.movieId === movieId));
+    },[movieId]);
 
-    const addReview = async (e) => {
+    // Save reviews to localStorage when reviews change
+    useEffect(() => {
+        const allReviews = JSON.parse(localStorage.getItem('allReviews') || '[]');
+        const filtered = allReviews.filter(r => r.movieId !== movieId);
+        localStorage.setItem('allReviews', JSON.stringify([...filtered, ...reviews]));
+    }, [reviews, movieId]);
+
+    const addReview = (e) => {
         e.preventDefault();
-       const rev = revText.current;
+        const rev = revText.current;
+        if (!user) return;
+        const newReview = {
+            movieId,
+            userEmail: user.email,
+            userName: user.name,
+            body: rev.value,
+            timestamp: Date.now(),
+        };
+        // Remove old review by this user for this movie
+        const filtered = reviews.filter(r => r.userEmail !== user.email);
+        setReviews([...filtered, newReview]);
+        rev.value = '';
+    };
 
-       try {
-           const response = await api.post('/reviews', { reviewBody: rev.value, imdbId:movieId });
-           const updatedReviews =[...reviews, {body: rev.value}];
-           rev.value = '';
-           setReviews(updatedReviews);
-           
-       } catch (err) {
-           console.error( err);
-       }
-    }
+    const startEdit = (review) => {
+        setEditingReviewId(review.userEmail);
+        setEditText(review.body);
+    };
+
+    const saveEdit = (review) => {
+        setReviews(reviews.map(r =>
+            r.userEmail === review.userEmail ? { ...r, body: editText, timestamp: Date.now() } : r
+        ));
+        setEditingReviewId(null);
+        setEditText("");
+    };
+
+    const cancelEdit = () => {
+        setEditingReviewId(null);
+        setEditText("");
+    };
+
+    const deleteReview = (review) => {
+        setReviews(reviews.filter(r => r.userEmail !== review.userEmail));
+    };
+
+    // Always use a local safeReviews array for mapping
+    const safeReviews = Array.isArray(reviews) ? reviews : [];
+
+    // Fix: Only call setReviews([]) in a useEffect, not during render
+    useEffect(() => {
+        if (!Array.isArray(reviews)) {
+            setReviews([]);
+        }
+    }, [reviews, setReviews]);
 
     return (
         <Container>
@@ -37,10 +84,10 @@ const Reviews = ({getMovieData, movie, reviews, setReviews}) => {
                 </Col>
             </Row>
             <Row className="mt-2">
-                <Col>
-                    <img src={movie?.poster} alt=""/>
+                <Col xs={12} md={4} className="reviews-form-col">
+                    <img src={movie?.poster} alt="" className="reviews-movie-poster" style={{width: '100%', maxWidth: 220, borderRadius: 8, marginBottom: 16}}/>
                 </Col>
-                <Col>
+                <Col xs={12} md={8} className="reviews-list-col">
                 {
                 <>
                 <Row>
@@ -54,17 +101,38 @@ const Reviews = ({getMovieData, movie, reviews, setReviews}) => {
                 </>
                 }
                 {
-                    reviews?.map((r) => {
+                    safeReviews.map((r) => {
+                        const isUserReview = user && r.userEmail === user.email;
                         return (
-                            <>
+                            <React.Fragment key={r.userEmail}>
                             <Row>
-                                <Col>{r.body}</Col></Row>
+                                <Col>
+                                    <b>{r.userName}</b>
+                                    <br/>
+                                    {editingReviewId === r.userEmail ? (
+                                        <>
+                                            <textarea value={editText} onChange={e => setEditText(e.target.value)} className="reviews-edit-textarea" style={{width:'100%'}} />
+                                            <button onClick={() => saveEdit(r)} className="reviews-btn" style={{marginRight:8}}>Save</button>
+                                            <button onClick={cancelEdit} className="reviews-btn">Cancel</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            {r.body}
+                                            {isUserReview && (
+                                                <>
+                                                    <button onClick={() => startEdit(r)} className="reviews-btn" style={{marginLeft:8}}>Edit</button>
+                                                    <button onClick={() => deleteReview(r)} className="reviews-btn" style={{marginLeft:8}}>Delete</button>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                </Col></Row>
                                 <Row>
                                     <Col>
                                         <hr />
                                     </Col>
                                 </Row>
-                            </>
+                            </React.Fragment>
                         )
                     })
                 }

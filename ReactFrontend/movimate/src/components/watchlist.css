@@ -1,0 +1,205 @@
+.watchlist-page {
+  padding: 32px 0 0 0;
+  min-height: 80vh;
+  background: #181a1b;
+}
+
+.watchlist-title {
+  color: gold;
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.watchlist-movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.watchlist-movie-card {
+  background: #23272b;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  overflow: hidden;
+  width: 200px;
+  transition: transform 0.18s, box-shadow 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.watchlist-movie-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(255, 204, 51, 0.12);
+}
+
+.watchlist-movie-poster {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-bottom: 1px solid #444;
+}
+
+.watchlist-movie-info {
+  padding: 16px 12px 12px 12px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  min-height: 140px;
+}
+
+.watchlist-movie-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.watchlist-movie-info p {
+  margin: 0 0 12px 0;
+  color: #ffb347;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watchlist-empty {
+  color: #aaa;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 48px;
+}
+
+.watchlist-add-section {
+  margin-top: 32px;
+}
+
+.watchlist-add-btn,
+.watchlist-remove-btn {
+  margin-top: 12px;
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.10);
+  align-self: center;
+  width: 90%;
+  min-width: 120px;
+  max-width: 160px;
+  margin-top: auto;
+  margin-bottom: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watchlist-add-btn:hover, .watchlist-add-btn:focus {
+  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+  box-shadow: 0 4px 16px rgba(0,123,255,0.18);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.watchlist-remove-btn {
+  margin-top: 12px;
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(90deg, #ff4e50 60%, #f9d423 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.10);
+  align-self: center;
+  width: 90%;
+  min-width: 120px;
+  max-width: 160px;
+  margin-top: auto;
+  margin-bottom: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.watchlist-remove-btn:hover, .watchlist-remove-btn:focus {
+  background: linear-gradient(90deg, #f9d423 60%, #ff4e50 100%);
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.18);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .watchlist-movies {
+    gap: 20px;
+  }
+  .watchlist-movie-card {
+    width: 160px;
+  }
+  .watchlist-movie-poster {
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .watchlist-page {
+    padding: 16px 0 0 0;
+  }
+  .watchlist-title {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+  }
+  .watchlist-movies {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .watchlist-movie-card {
+    width: 95vw;
+    min-width: 0;
+    max-width: 340px;
+    border-radius: 10px;
+  }
+  .watchlist-movie-poster {
+    height: 160px;
+    border-radius: 0;
+  }
+  .watchlist-movie-info {
+    padding: 10px 6px 8px 6px;
+    font-size: 0.95rem;
+  }
+  .watchlist-add-btn, .watchlist-remove-btn {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem;
+    min-width: 80px;
+    max-width: 120px;
+  }
+}

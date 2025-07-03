@@ -1,0 +1,146 @@
+.header-navbar {
+  background-color: #222;
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  width: 100%;
+}
+
+.header-brand {
+  color: gold !important;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+}
+
+.header-brand svg {
+  color: gold !important;
+  fill: gold !important;
+}
+
+.header-brand .navbar-brand, .header-brand, .header-brand * {
+  color: gold !important;
+  fill: gold !important;
+}
+
+.header-brand .navbar-brand {
+  color: gold !important;
+}
+
+.header-navbar-collapse {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+}
+
+.header-nav {
+  max-height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.header-searchbar-container {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+.header-username {
+  color: white;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.header-user-icon {
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.header-user-menu {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  background: #222;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.header-user-menu-item {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .header-navbar {
+    padding: 0 8px;
+  }
+  .header-brand {
+    font-size: 1.1rem;
+    margin-right: 10px;
+  }
+  .header-searchbar-container {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+  .header-user {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2px;
+  }
+  .header-brand {
+    font-size: 1rem;
+    margin-right: 0;
+    margin-bottom: 6px;
+  }
+  .header-navbar-collapse {
+    flex-direction: column !important;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .header-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .header-searchbar-container {
+    width: 100%;
+    margin: 4px 0;
+  }
+  .header-user {
+    margin-left: 0;
+    margin-top: 6px;
+  }
+  .header-username {
+    font-size: 0.95rem;
+  }
+  .header-user-icon {
+    font-size: 1.3rem;
+  }
+  .header-user-menu {
+    right: 2px;
+    left: auto;
+    min-width: 120px;
+  }
+}

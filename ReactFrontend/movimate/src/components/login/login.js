@@ -19,20 +19,17 @@ const Login = ({ onLogin }) => {
       setError('Please enter both email and password.');
       return;
     }
-    setError('');
-    // Simulate login success and set user name from backend or localStorage
-    let name = '';
-    // Try to get name from localStorage (set during registration)
     const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const user = registeredUsers.find(u => u.email === email && u.password === password);
-    if (user) {
-      name = user.name;
-    } else {
-      name = email.split('@')[0]; // fallback
+    if (!user) {
+      setError('Invalid email or password.');
+      return;
     }
+    setError('');
     if (onLogin) {
-      onLogin({ name, email });
+      onLogin({ name: user.name, email: user.email });
     }
+    localStorage.setItem('loggedInUser', JSON.stringify({ name: user.name, email: user.email }));
     navigate('/');
   };
 

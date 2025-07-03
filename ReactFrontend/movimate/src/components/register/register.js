@@ -22,11 +22,13 @@ const Register = ({ onRegister }) => {
       setError('Passwords do not match.');
       return;
     }
-    setError('');
-    // Save user to localStorage (prevent duplicate emails)
     let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-    // Remove any existing user with the same email
-    registeredUsers = registeredUsers.filter(u => u.email !== email);
+    // Check for duplicate email
+    if (registeredUsers.some(u => u.email === email)) {
+      setError('An account with this email address is already registered. Login instead.');
+      return;
+    }
+    setError('');
     registeredUsers.push({ name, email, password });
     localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
     if (onRegister) onRegister({ name, email, password });

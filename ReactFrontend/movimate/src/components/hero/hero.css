@@ -105,12 +105,22 @@
   font-size: 4rem
 }
 
-.watch-trailer-text {
-  color: white;
+a .watch-trailer-text, .watch-trailer-text {
+  text-decoration: none !important;
+  color: white !important;
   text-align: center;
   margin-top: 4px;
   font-weight: normal;
   font-size: 1rem;
+  border: none;
+  background: none;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+}
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none !important;
+  color: white !important;
 }
 
 .carousel-nav-btn {
