@@ -8,8 +8,8 @@ const Watchlist = ({ watchlist, allMovies, onAddToWatchlist, onRemoveFromWatchli
 
   return (
     <div className="watchlist-page">
-      <div style={{display: 'flex', alignItems: 'center', position: 'relative'}}>
-        <h2 className="watchlist-title" style={{margin: 0}}>My Watchlist</h2>
+      <div className="watchlist-title-container">
+        <h2 className="watchlist-title">My Watchlist</h2>
       </div>
       {watchlist && watchlist.length > 0 ? (
         <>
