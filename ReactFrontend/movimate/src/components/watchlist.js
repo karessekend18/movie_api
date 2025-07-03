@@ -2,7 +2,6 @@ import React from "react";
 import './watchlist.css';
 
 const Watchlist = ({ watchlist, allMovies, onAddToWatchlist, onRemoveFromWatchlist }) => {
-  // Debug: log props to check for object rendering issues
   console.log('watchlist:', watchlist);
   console.log('allMovies:', allMovies);
 

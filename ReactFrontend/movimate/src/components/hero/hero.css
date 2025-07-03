@@ -149,44 +149,68 @@ a:link, a:visited, a:hover, a:active {
 
 @media (max-width: 900px) {
   .movie-card-container {
-    top: 0;
-    height: calc(100vh - 56px);
-    position: relative;
+    height: auto;
+    min-height: 400px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-detail {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
   }
   .movie-poster {
-    height: 38vw;
-    min-height: 120px;
-    max-height: 200px;
-  }
-  .movie-card-container {
-    height: 65vw;
-    min-height: 200px;
+    margin: 0 auto 12px auto;
+    height: 36vw;
+    max-height: 180px;
+    min-height: 100px;
+    width: 40vw;
+    max-width: 160px;
   }
   .movie-title {
-    font-size: 4vw;
+    font-size: 1.1rem;
+    margin: 8px 0 8px 0;
+    text-align: center;
+    word-break: break-word;
   }
 }
 
 @media (max-width: 600px) {
   .movie-card-container {
-    top: 0;
-    height: calc(100vh - 48px);
-    position: relative;
-  }
-  .movie-poster {
-    height: 48vw;
-    min-height: 80px;
-    max-height: 120px;
+    height: auto;
+    min-height: 320px;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
   }
   .movie-detail {
-    top: 20%;
-    padding: 0 1vw;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 4px;
   }
-  .movie-card-container {
-    height: 75vw;
-    min-height: 120px;
+  .movie-poster {
+    margin: 0 auto 8px auto;
+    height: 28vw;
+    max-height: 110px;
+    min-height: 60px;
+    width: 60vw;
+    max-width: 120px;
   }
   .movie-title {
-    font-size: 6vw;
+    font-size: 0.98rem;
+    margin: 6px 0 6px 0;
+    text-align: center;
+    word-break: break-word;
+  }
+  .movie-card {
+    min-height: unset;
+    height: auto;
+    padding-bottom: 16px;
   }
 }
