@@ -3,7 +3,7 @@ import './hero.css';
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlay, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay, faChevronLeft, faChevronRight, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
@@ -49,6 +49,12 @@ const Hero = ({movies}) => {
                             >
                               {movie.title}
                             </span>
+                            <FontAwesomeIcon
+                              icon={faInfoCircle}
+                              style={{ color: '#ffd700', fontSize: 20, cursor: 'pointer' }}
+                              title="Movie Details"
+                              onClick={e => { e.stopPropagation(); navigate(`/movie/${movie.imdbId}`); }}
+                            />
                         </div>
                         <div className="movie-buttons-container">
                             <Link to={`/Trailer/${movie.trailerLink && movie.trailerLink.substring(movie.trailerLink.length-11)}`} >

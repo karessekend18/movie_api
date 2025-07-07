@@ -102,7 +102,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header user={user} onSignOut={handleSignOut} onSearch={handleSearch} />
+      <Header user={user} onSignOut={handleSignOut} onSearch={handleSearch} movies={movies} />
 
       <Routes>
         <Route path ="/" element={<Layout />}>

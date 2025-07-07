@@ -36,4 +36,11 @@ public class MovieController {
         List<Movie> results = movieService.searchMoviesByTitle(query);
         return new ResponseEntity<>(results, HttpStatus.OK);
     }
+
+    @GetMapping("/by-title")
+    public ResponseEntity<Movie> getSingleMovieByTitle(@RequestParam("title") String title) {
+        return movieService.singleMovieByTitle(title)
+                .map(movie -> new ResponseEntity<>(movie, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

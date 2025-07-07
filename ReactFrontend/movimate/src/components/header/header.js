@@ -49,7 +49,7 @@ const Header = ({ user, onSignOut, onSearch }) => {
                           </>}
                       </Nav>
                       <div className="header-searchbar-container">
-                          <SearchBar onSearch={onSearch} />
+                          <SearchBar onSearch={onSearch} movies={location.pathname === '/' ? undefined : []} />
                       </div>
                       {user ? (
                           <div className="header-user" ref={menuRef}>
